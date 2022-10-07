@@ -24,7 +24,8 @@ public class Menus {
         }
     }
     private static void menuCliente(){
-        System.out.println("Bem vindo a area de Clientes");
+        System.out.println("Ainda não implementado.");
+        menuInicial();
     }
 
     private static void   option(){
