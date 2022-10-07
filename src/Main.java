@@ -17,11 +17,13 @@ public class Main {
         if (companhias.size() == 0){
             id = 1;
         } else {
-            id = companhias.get(companhias.size()-1).getId();
-            id++;
+            id = companhias.get(companhias.size()-1).getId() + 1;
         }
-        companhias.add(new CompanhiaAerea(id,nome));
-        System.out.println("Companhia criada com sucesso");
+        if (companhias.add(new CompanhiaAerea(id,nome))){
+            System.out.println("Companhia criada com sucesso");
+        }else {
+            System.out.println("Erro");
+        }
         Menus.menuTodasCompanhias();
     }
     public static void mostrarCompanhias(){
