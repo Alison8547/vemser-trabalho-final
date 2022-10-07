@@ -41,13 +41,13 @@ public class Menus {
         switch (valorDigitado()){
             case 0 -> menuInicial();
             case 1 -> {
-                Main.mostrarCompanhias();
+                CompanhiaManipulacao.mostrarCompanhias();
                 menuTodasCompanhias();
             }
-            case 2 -> Main.criarCompanhia();
-            case 3 -> Main.selecionarCompanhia();
-            case 4 -> Main.editarCompanhia();
-            case 5 -> Main.deletarCompanhia();
+            case 2 -> CompanhiaManipulacao.criarCompanhia();
+            case 3 -> CompanhiaManipulacao.selecionarCompanhia();
+            case 4 -> CompanhiaManipulacao.editarCompanhia();
+            case 5 -> CompanhiaManipulacao.deletarCompanhia();
         }
     }
 
