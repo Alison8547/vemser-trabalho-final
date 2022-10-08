@@ -8,11 +8,10 @@ public abstract class Crud<T> {
         value.add(obj);
     }
 
-    public Object readList(Integer index){
+     public T readList(Integer index){
         T aux = value.get(index);
-        return null;
+        return aux;
     }
-
     public void deleteList(Integer index){
         value.remove(index.intValue());
     }
