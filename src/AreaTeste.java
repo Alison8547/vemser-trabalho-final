@@ -24,17 +24,26 @@ public class AreaTeste {
         Cliente cliente8 = new Cliente("Lucas",26,"0000000000","lucas.pereira@dbccompany.br","000000000");
 
         //Voo
-        Voo voo1 = new Voo(null,sdf.parse("10/10/2022"),sdf.parse("12/10/2022"),"Porto Alegre/RS/BR","Montivideo/UY", 350.50);
+        Voo voo1 = new Voo(List.of(cliente1, cliente3),"Gol",sdf.parse("10/10/2022"),sdf.parse("12/10/2022"),"Porto Alegre/RS/BR","Montivideo/UY", 350.50);
 
-        Voo voo2 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),sdf.parse("17/10/2022"),sdf.parse("22/10/2022"),"Porto Alegre/RS/BR","Dubai/EM", 33350.50);
+        Voo voo2 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Emirates Airlines",sdf.parse("17/10/2022"),sdf.parse("22/10/2022"),"Porto Alegre/RS/BR","Dubai/EM", 33350.50);
 
-        Voo voo3 = new Voo(null,sdf.parse("15/10/2022"),sdf.parse("15/10/2022"),"Porto Alegre/RS/BR","Rio de Janeiro/RJ/BR", 250.90);
+        Voo voo3 = new Voo(List.of(cliente1, cliente5, cliente4, cliente7),"Tam",sdf.parse("15/10/2022"),sdf.parse("15/10/2022"),"Porto Alegre/RS/BR","Rio de Janeiro/RJ/BR", 250.90);
 
-        Voo voo4 = new Voo(null,sdf.parse("23/12/2022"),sdf.parse("27/12/2022"),"Porto Alegre/RS/BR","Natal/RN/BR", 490.68);
+        Voo voo4 = new Voo(null,"Azul",sdf.parse("23/12/2022"),sdf.parse("27/12/2022"),"Porto Alegre/RS/BR","Natal/RN/BR", 490.68);
 
-        Voo voo5 = new Voo(null,sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 325.37);
+        Voo voo5 = new Voo(null,"Azul",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 325.37);
 
-        Voo voo6 = new Voo(null,sdf.parse("13/12/2022"),sdf.parse("17/12/2022"),"Dubai/EM","Porto Alegre/RS/BR", 27350.50);
+        Voo voo6 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Emirates Airlines",sdf.parse("13/12/2022"),sdf.parse("17/12/2022"),"Dubai/EM","Porto Alegre/RS/BR", 27350.50);
+
+        //CompanhiaAerea
+        CompanhiaAerea companhiaAerea1 = new CompanhiaAerea("Gol");
+
+        CompanhiaAerea companhiaAerea2 = new CompanhiaAerea("Tam");
+
+        CompanhiaAerea companhiaAerea3 = new CompanhiaAerea("Azul");
+
+        CompanhiaAerea companhiaAerea4 = new CompanhiaAerea("Emirates Airlines");
 
     }
 }

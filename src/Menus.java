@@ -2,6 +2,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menus {
@@ -9,6 +10,86 @@ public class Menus {
     static ClienteManipulacao clienteManipulacao = new ClienteManipulacao();
     static CompanhiaManipulacao companhiaManipulacao = new CompanhiaManipulacao();
     static Scanner scan1 = new Scanner(System.in);
+    static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    //Cliente
+    static Cliente cliente1 = new Cliente("Pietro",26,"00566783045","pietro.bianchi@dbccompany.br","994668885");
+    static Cliente cliente2 = new Cliente("Alison",24,"9999999999","alison.silva@dbccompany.br","6666666666");
+    static Cliente cliente3 = new Cliente("Kevin",25,"88888888888","kevin.aryel@dbccompany.br","77777777777");
+    static Cliente cliente4 = new Cliente("Maicon",31,"11111111111","maicon.gerardi@dbccompany.br","5555555555");
+    static Cliente cliente5 = new Cliente("Ricardo",27,"2222222222","ricador.langbecker@dbccompany.br","4444444444");
+    static Cliente cliente6 = new Cliente("Gaby",24,"3333333333","gaby.freitas@dbccompany.br","33333333333");
+    static Cliente cliente7 = new Cliente("Felipe",26,"4444444444","felipe.noguez@dbccompany.br","888888888");
+    static Cliente cliente8 = new Cliente("Lucas",26,"0000000000","lucas.pereira@dbccompany.br","000000000");
+
+    //Voo
+    static Voo voo1;
+
+    static {
+        try {
+            voo1 = new Voo(List.of(cliente1, cliente3),"Gol",(sdf.parse("10/10/2022")),(sdf.parse("12/10/2022")),"Porto Alegre/RS/BR","Montivideo/UY", 350.50);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static Voo voo2;
+
+    static {
+        try {
+            voo2 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Emirates Airlines",sdf.parse("17/10/2022"),sdf.parse("22/10/2022"),"Porto Alegre/RS/BR","Dubai/EM", 33350.50);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static Voo voo3;
+
+    static {
+        try {
+            voo3 = new Voo(List.of(cliente1, cliente5, cliente4, cliente7),"Tam",sdf.parse("15/10/2022"),sdf.parse("15/10/2022"),"Porto Alegre/RS/BR","Rio de Janeiro/RJ/BR", 250.90);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static Voo voo4;
+
+    static {
+        try {
+            voo4 = new Voo(null,"Azul",(sdf.parse("23/12/2022")),sdf.parse("27/12/2022"),"Porto Alegre/RS/BR","Natal/RN/BR", 490.68);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static Voo voo5;
+
+    static {
+        try {
+            voo5 = new Voo(null,"Azul",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 325.37);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static Voo voo6;
+
+    static {
+        try {
+            voo6 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Emirates Airlines",sdf.parse("13/12/2022"),sdf.parse("17/12/2022"),"Dubai/EM","Porto Alegre/RS/BR", 27350.50);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //CompanhiaAerea
+    static CompanhiaAerea companhiaAerea1 = new CompanhiaAerea("Gol");
+    static CompanhiaAerea companhiaAerea2 = new CompanhiaAerea("Tam");
+    static CompanhiaAerea companhiaAerea3 = new CompanhiaAerea("Azul");
+    static CompanhiaAerea companhiaAerea4 = new CompanhiaAerea("Emirates Airlines");
+
+    public Menus() throws ParseException {
+    }
 
     static int valorDigitado(){
         Scanner scan = new Scanner(System.in);
@@ -17,7 +98,27 @@ public class Menus {
         return valor;
     }
 
-    public static void menuInicial() throws ParseException {
+    public static void menuInicial(boolean test) throws ParseException {
+        if (test == false){
+            clienteManipulacao.createList(cliente1);
+            clienteManipulacao.createList(cliente2);
+            clienteManipulacao.createList(cliente3);
+            clienteManipulacao.createList(cliente4);
+            clienteManipulacao.createList(cliente5);
+            clienteManipulacao.createList(cliente6);
+            clienteManipulacao.createList(cliente7);
+            clienteManipulacao.createList(cliente8);
+            companhiaManipulacao.createList(companhiaAerea1);
+            companhiaManipulacao.createList(companhiaAerea2);
+            companhiaManipulacao.createList(companhiaAerea3);
+            companhiaManipulacao.createList(companhiaAerea4);
+            vooManipulacao.createList(voo1);
+            vooManipulacao.createList(voo2);
+            vooManipulacao.createList(voo3);
+            vooManipulacao.createList(voo4);
+            vooManipulacao.createList(voo5);
+            vooManipulacao.createList(voo6);
+        test = true;}
         System.out.println("Olá, bem vindo ao sistema de passagens aéreas Varig");
         System.out.println("Digite 1 para entrar ná pagina de clientes," +
                 " 2 para entrar na página de Companhias ou 0 para sair");
@@ -34,7 +135,7 @@ public class Menus {
                 .allOf(MenuClienteGeralEnum.class)
                 .forEach(value -> System.out.println(value.getDescricao()));
         switch (valorDigitado()){
-            case 0 -> menuInicial();
+            case 0 -> menuInicial(true);
             case 1 -> {
                 Cliente cliente = new Cliente();
                 System.out.println("Digite seu nome: ");
@@ -58,6 +159,15 @@ public class Menus {
                 clienteManipulacao.listar();
                 System.out.println("Qual cliente você quer buscar pelo seu id ?");
                 System.out.println(clienteManipulacao.readList(valorDigitado()));
+                EnumSet
+                        .allOf(MenuClienteEnum.class)
+                        .forEach(value -> System.out.println(value.getDescricao()));
+                switch (valorDigitado()){
+                    case 1 -> {System.err.println("OPCAO 1 NAO DESENVOLVIDA");menuCliente();}
+                    case 2 -> {System.err.println("OPCAO 2 NAO DESENVOLVIDA");menuCliente();}
+                    case 0 -> {menuCliente();}
+                    default -> {System.err.println("Opção inválida!");}
+                }
                 menuCliente();
             }
             case 4 -> {
@@ -103,7 +213,7 @@ public class Menus {
                 .allOf(MenuCompanhiaGeralEnum.class)
                 .forEach(value -> System.out.println(value.getDescricao()));
         switch (valorDigitado()){
-            case 0 -> menuInicial();
+            case 0 -> menuInicial(true);
             case 1 -> {
                 companhiaManipulacao.listar();
                 menuTodasCompanhias();
@@ -171,7 +281,47 @@ public class Menus {
                 menuCompanhia(companhia);
             }
             case 2 -> {
+                //ARRUMAR LOGICA PARA LISTAR TODOS OS VOOS QUE POSSUEM A MESMA COMPANHIA AEREA
+                vooManipulacao.listar();
+                menuCompanhia(companhia);
+            }
+            case 3 -> {
+                System.out.println("Qual voo você quer editar ?");
+                vooManipulacao.listar();
+                System.out.println("Digite seu id: ");
+                int index = scan1.nextInt();
+                scan1.nextLine();
 
+                Voo voo = new Voo();
+                voo.setPassageiros(null);
+                System.out.println("Digite a data de partida: ");
+                Date date = sdf.parse(scan1.next());
+                voo.setDataPartida(date);
+                System.out.println("Digite a data de chegada: ");
+                date = sdf.parse(scan1.next());
+                voo.setDataChegada(date);
+                System.out.println("Digite o Local de partida: ");
+                voo.setLocalPartida(scan1.nextLine());
+                System.out.println("Digite o Local de chegada: ");
+                voo.setLocalChegada(scan1.nextLine());
+                System.out.println("Digite o preço da passagem: ");
+                voo.setPrecoPassagem(scan1.nextDouble());
+                vooManipulacao.createList(voo);
+                menuCompanhia(companhia);
+            }
+            case 4 -> {
+                System.out.println("Qual voo você deseja excluir ?");
+                vooManipulacao.listar();
+                System.out.println("Digite o id dele: ");
+                int index = scan1.nextInt();
+                vooManipulacao.deleteList(index);
+                menuCompanhia(companhia);
+            }
+            case 5 -> {
+                vooManipulacao.listar();
+                System.out.println("Qual voo você imprimir, busque pelo seu id ?");
+                System.out.println(vooManipulacao.readList(scan1.nextInt()));
+                menuCompanhia(companhia);
             }
             case 6 -> {
                 companhia.imprimir();

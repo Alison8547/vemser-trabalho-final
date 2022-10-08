@@ -14,7 +14,6 @@ public class CompanhiaAerea {
 
      private static final SecureRandom secureRandom = new SecureRandom();
 
-
      {
           idCompanhia = 1 + secureRandom.nextInt(400);
      }
