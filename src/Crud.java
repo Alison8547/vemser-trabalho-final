@@ -18,7 +18,7 @@ public abstract class Crud<T> {
 
     public List<T> listar() {
         for (int i = 0; i < value.size(); i++) {
-            System.out.println("id=" + i + " | " + value.get(i));
+            System.out.println("index=" + i + " | " + value.get(i));
         }
         return null;
     }
