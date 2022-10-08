@@ -24,8 +24,14 @@ public class Menus {
         }
     }
     private static void menuCliente(){
-        System.out.println("Ainda não implementado.");
-        menuInicial();
+        System.out.println("\nBem vindo a area de Clientes");
+        option();
+        EnumSet
+                .allOf(MenuClienteGeralEnum.class)
+                .forEach(value -> System.out.println(value.getDescricao()));
+        switch (valorDigitado()){
+            case 0 -> menuInicial();
+        }
     }
 
     private static void   option(){
