@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Voo {
-
     private int id;
+    private String companhia;
     private List<Cliente> passageiros = new ArrayList<>();
     private Date dataPartida;
     private Date dataChegada;
@@ -18,8 +18,9 @@ public class Voo {
         id = 1 + secureRandom.nextInt(100);
     }
 
-    public Voo(List<Cliente> passageiros, Date dataPartida, Date dataChegada, String localPartida, String localChegada, double precoPassagem) {
+    public Voo(List<Cliente> passageiros, String companhia, Date dataPartida, Date dataChegada, String localPartida, String localChegada, double precoPassagem) {
         this.passageiros = passageiros;
+        this.setCompanhia(companhia);
         this.dataPartida = dataPartida;
         this.dataChegada = dataChegada;
         this.localPartida = localPartida;
@@ -95,5 +96,13 @@ public class Voo {
 
     public void setPrecoPassagem(double precoPassagem) {
         this.precoPassagem = precoPassagem;
+    }
+
+    public String getCompanhia() {
+        return companhia;
+    }
+
+    public void setCompanhia(String companhia) {
+        this.companhia = companhia;
     }
 }

@@ -5,6 +5,7 @@ import java.util.EnumSet;
 import java.util.Scanner;
 
 public class Menus {
+    static VooManipulacao vooManipulacao = new VooManipulacao();
     static ClienteManipulacao clienteManipulacao = new ClienteManipulacao();
     static CompanhiaManipulacao companhiaManipulacao = new CompanhiaManipulacao();
     static Scanner scan1 = new Scanner(System.in);
@@ -153,6 +154,7 @@ public class Menus {
             case 1 -> {
                 Voo voo = new Voo();
                 voo.setPassageiros(null);
+                voo.setCompanhia(companhia.getNome());
                 System.out.println("Digite a data de partida: ");
                 Date date = sdf.parse(scan1.nextLine());
                 voo.setDataPartida(date);
@@ -165,7 +167,7 @@ public class Menus {
                 voo.setLocalChegada(scan1.nextLine());
                 System.out.println("Digite o preço da passagem: ");
                 voo.setPrecoPassagem(scan1.nextDouble());
-                companhia.getVoos().add(voo);
+                vooManipulacao.createList(voo);
                 menuCompanhia(companhia);
             }
             case 2 -> {
