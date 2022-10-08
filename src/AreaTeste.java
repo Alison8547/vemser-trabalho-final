@@ -6,6 +6,7 @@ public class AreaTeste {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public AreaTeste() throws ParseException {
+        /*
         //Cliente
         Cliente cliente1 = new Cliente("Pietro",26,"00566783045","pietro.bianchi@dbccompany.br","994668885");
 
@@ -44,6 +45,6 @@ public class AreaTeste {
         CompanhiaAerea companhiaAerea3 = new CompanhiaAerea("Azul");
 
         CompanhiaAerea companhiaAerea4 = new CompanhiaAerea("Emirates Airlines");
-
+*/
     }
 }

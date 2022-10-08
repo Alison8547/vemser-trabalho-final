@@ -33,13 +33,13 @@ public class Voo {
     public String toString() {
         return "Voo{" +
                 "id=" + id +
-                ", companhia='" + companhia + '\'' +
-                ", passageiros=" + passageiros +
-                ", dataPartida=" + dataPartida +
-                ", dataChegada=" + dataChegada +
-                ", localPartida='" + localPartida + '\'' +
-                ", localChegada='" + localChegada + '\'' +
-                ", precoPassagem=" + precoPassagem +
+                ", companhia = " + getCompanhia() +
+                ", passageiros=" + getPassageiros() +
+                ", dataPartida=" + getDataPartida() +
+                ", dataChegada=" + getDataChegada() +
+                ", localPartida='" + getLocalPartida() + '\'' +
+                ", localChegada='" + getLocalChegada() + '\'' +
+                ", precoPassagem=" + getPrecoPassagem() +
                 '}';
     }
 
