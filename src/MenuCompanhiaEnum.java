@@ -3,8 +3,7 @@ public enum MenuCompanhiaEnum {
     MOSTRAR_VOO("Mostrar todos os voos = 2"),
     EDITAR_VOO("Editar voo = 3"),
     CANCELAR_VOO("Cancelar voo = 4"),
-    IMPRIMIR_VOO("Imprimir voo = 5"),
-    IMPRIMIR("Imprimir dados da companhia = 6"),
+    IMPRIMIR("Imprimir dados da companhia = 5"),
     VOLTAR("Voltar ao menu anterior = 0");
 
     private String descricao;
