@@ -33,6 +33,7 @@ public class Voo {
     public String toString() {
         return "Voo{" +
                 "id=" + id +
+                ", companhia = " + getCompanhia() +
                 ", passageiros=" + getPassageiros() +
                 ", dataPartida=" + getDataPartida() +
                 ", dataChegada=" + getDataChegada() +
