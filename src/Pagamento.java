@@ -1,3 +1,4 @@
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,10 +8,17 @@ public class Pagamento {
     private final LocalDateTime dataHoraPagamento = LocalDateTime.now();
     private Cliente cliente;
     private Voo voo;
+    private CompanhiaAerea companhiaAerea;
+    private static final SecureRandom secureRandom = new SecureRandom();
 
-    public Pagamento(Cliente cliente, Voo voo) {
+    {
+        idPagamento = 1 + secureRandom.nextInt(500);
+    }
+
+    public Pagamento(Cliente cliente, Voo voo, CompanhiaAerea companhiaAerea) {
         this.cliente = cliente;
         this.voo = voo;
+        this.companhiaAerea = companhiaAerea;
     }
 
     public boolean pagar(Voo voo) {
@@ -22,6 +30,7 @@ public class Pagamento {
         System.out.printf("Data e Hora do pagamento: %s%n", getDataHoraPagamento());
         System.out.printf("Nome: %s%nCpf: %s%n", cliente.getNome(), cliente.getCpf());
         System.out.printf("Preço do Voo: R$ %.2f%n", voo.getPrecoPassagem());
+        System.out.printf("Nome da Companhia: %s%n", companhiaAerea.getNome());
         System.out.printf("Id do Voo: %d%nLocal Partida: %s%nLocal Chegada: %s%n", voo.getId(), voo.getLocalPartida(), voo.getLocalChegada());
 
 
