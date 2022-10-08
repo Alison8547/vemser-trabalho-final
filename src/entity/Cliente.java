@@ -1,21 +1,40 @@
 package entity;
 
+import java.security.SecureRandom;
+
 public class Cliente {
     private Long idCliente;
     private String nome;
+    private int idade;
     private String cpf;
     private String email;
     private String telefone;
+    private static final SecureRandom secureRandom = new SecureRandom();
 
-    public Cliente(Long idCliente, String nome, String cpf, String email, String telefone) {
-        this.idCliente = idCliente;
+    {
+        idCliente = 1 + secureRandom.nextLong(400);
+    }
+
+    public Cliente(String nome, int idade, String cpf, String email, String telefone) {
         this.nome = nome;
+        this.idade = idade;
         this.cpf = cpf;
         this.email = email;
         this.telefone = telefone;
     }
 
     public Cliente() {
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "idCliente=" + idCliente +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                '}';
     }
 
     public Long getIdCliente() {
@@ -56,5 +75,13 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 }
