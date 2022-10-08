@@ -1,5 +1,3 @@
-package MenuEnums;
-
 public enum MenuCompanhiaGeralEnum {
     MOSTRAR_COMPANHIAS("Mostrar Companhias = 1"),
     CRIAR_COMPANHIA("Criar nova Companhia = 2"),

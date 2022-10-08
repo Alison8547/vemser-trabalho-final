@@ -1,5 +1,3 @@
-package MenuEnums;
-
 public enum MenuCompanhiaEnum {
     //CRIAR_VOO("Criar novo voo = 1"),
     //MOSTRAR_VOO("Mostrar voo = 2"),
@@ -16,5 +14,12 @@ public enum MenuCompanhiaEnum {
 
     public String getDescricao(){
         return this.descricao;
+    }
+
+    public enum TipoPagamento {
+        PIX,
+        CARTAO,
+        BOLETO
+
     }
 }

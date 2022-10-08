@@ -1,5 +1,3 @@
-package entity;
-
 import java.security.SecureRandom;
 
 public class Cliente {
