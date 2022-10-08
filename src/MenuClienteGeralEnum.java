@@ -1,4 +1,3 @@
-package MenuEnums;
 
 public enum MenuClienteGeralEnum {
         ADICIONAR_CLIENTE("Digite [1] para adicionar um cliente"),

@@ -1,6 +1,3 @@
-import MenuEnums.*;
-import entity.CompanhiaAerea;
-
 import java.util.EnumSet;
 import java.util.Scanner;
 

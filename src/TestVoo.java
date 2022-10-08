@@ -1,13 +1,10 @@
-import entity.Voo;
-import entity.VooManipulacao;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
 public class TestVoo {
-    public static void main(String[] args) throws ParseException {
+    public static void testVoo() throws ParseException {
         Scanner sc = new Scanner(System.in);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         VooManipulacao vooManipulacao = new VooManipulacao();
