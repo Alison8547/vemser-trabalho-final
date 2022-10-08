@@ -1,20 +1,27 @@
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CompanhiaAerea {
      private List<Voo> voos = new ArrayList<>();
-     private int id;
+     private int idCompanhia;
      private String nome;
      public int getId(){
-          return id;
+          return idCompanhia;
      }
-     public CompanhiaAerea(int id, String nome){
-          this.id = id;
+     public CompanhiaAerea( String nome){
           this.nome = nome;
      }
 
+     private static final SecureRandom secureRandom = new SecureRandom();
+
+
+     {
+          idCompanhia = 1 + secureRandom.nextInt(400);
+     }
+
      public String toString(){
-          return "Id: "+id+" Nome: "+nome;
+          return "Id: "+idCompanhia+" Nome: "+nome;
      }
 
      public void setNome(String nome){
@@ -30,7 +37,7 @@ public class CompanhiaAerea {
 
      public void imprimir(){
           System.out.println("Dados da companhia "+nome);
-          System.out.println("ID = "+id);
+          System.out.println("ID = "+idCompanhia);
           System.out.println("Voos:");
           if (voos.size() == 0 ){
                System.out.println("Nenhum voo encontrado");
