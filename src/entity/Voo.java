@@ -1,19 +1,26 @@
 package entity;
+import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Voo {
 
     private int id;
-    private Cliente[] passageiros;
+    private List<Cliente> passageiros = new ArrayList<>();
     private Date dataPartida;
     private Date dataChegada;
     private String localPartida;//(Cidade/Estado/Pais)
     private String localChegada;//(Cidade/Estado/Pais)
     private double precoPassagem;
+    private static final SecureRandom secureRandom = new SecureRandom();
 
-    public Voo(int id, Cliente[] passageiros, Date dataPartida, Date dataChegada, String localPartida, String localChegada, double precoPassagem) {
-        this.id = id;
+    {
+        id = 1 + secureRandom.nextInt(100);
+    }
+
+    public Voo(List<Cliente> passageiros, Date dataPartida, Date dataChegada, String localPartida, String localChegada, double precoPassagem) {
         this.passageiros = passageiros;
         this.dataPartida = dataPartida;
         this.dataChegada = dataChegada;
@@ -21,17 +28,18 @@ public class Voo {
         this.localChegada = localChegada;
         this.precoPassagem = precoPassagem;
     }
+    public Voo(){}
 
     @Override
     public String toString() {
         return "Voo{" +
                 "id=" + id +
-                ", passageiros=" + Arrays.toString(passageiros) +
-                ", dataPartida=" + dataPartida +
-                ", dataChegada=" + dataChegada +
-                ", localPartida='" + localPartida + '\'' +
-                ", localChegada='" + localChegada + '\'' +
-                ", precoPassagem=" + precoPassagem +
+                ", passageiros=" + getPassageiros() +
+                ", dataPartida=" + getDataPartida() +
+                ", dataChegada=" + getDataChegada() +
+                ", localPartida='" + getLocalPartida() + '\'' +
+                ", localChegada='" + getLocalChegada() + '\'' +
+                ", precoPassagem=" + getPrecoPassagem() +
                 '}';
     }
 
@@ -43,11 +51,11 @@ public class Voo {
         this.id = id;
     }
 
-    public Cliente[] getPassageiros() {
+    public List<Cliente> getPassageiros() {
         return passageiros;
     }
 
-    public void setPassageiros(Cliente[] passageiros) {
+    public void setPassageiros(List<Cliente> passageiros) {
         this.passageiros = passageiros;
     }
 

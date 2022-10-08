@@ -3,11 +3,27 @@ import entity.ClienteManipulacao;
 
 import java.util.Scanner;
 
-public class Test {
+public class TestCliente {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         ClienteManipulacao clienteManipulacao = new ClienteManipulacao();
+        Cliente cliente1 = new Cliente("Pietro",26,"00566783045","pietro.bianchi@dbccompany.br","994668885");
+        clienteManipulacao.createList(cliente1);
+        Cliente cliente2 = new Cliente("Alison",24,"9999999999","alison.silva@dbccompany.br","6666666666");
+        clienteManipulacao.createList(cliente2);
+        Cliente cliente3 = new Cliente("Kevin",25,"88888888888","kevin.aryel@dbccompany.br","77777777777");
+        clienteManipulacao.createList(cliente3);
+        Cliente cliente4 = new Cliente("Maicon",31,"11111111111","maicon.gerardi@dbccompany.br","5555555555");
+        clienteManipulacao.createList(cliente4);
+        Cliente cliente5 = new Cliente("Ricardo",27,"2222222222","ricador.langbecker@dbccompany.br","4444444444");
+        clienteManipulacao.createList(cliente5);
+        Cliente cliente6 = new Cliente("Gaby",24,"3333333333","gaby.freitas@dbccompany.br","33333333333");
+        clienteManipulacao.createList(cliente6);
+        Cliente cliente7 = new Cliente("Felipe",26,"4444444444","felipe.noguez@dbccompany.br","888888888");
+        clienteManipulacao.createList(cliente7);
+        Cliente cliente8 = new Cliente("Lucas",26,"0000000000","lucas.pereira@dbccompany.br","000000000");
+        clienteManipulacao.createList(cliente8);
 
         int escolha = 0;
 
@@ -30,22 +46,22 @@ public class Test {
                     cliente.setEmail(scanner.nextLine());
                     System.out.println("Digite seu telefone: ");
                     cliente.setTelefone(scanner.nextLine());
-                    clienteManipulacao.adicionarCliente(cliente);
+                    clienteManipulacao.createList(cliente);
                 }
 
                 case 2 -> {
-                    clienteManipulacao.listarClientes();
+                    clienteManipulacao.listar();
                 }
 
                 case 3 -> {
-                    clienteManipulacao.listarClientes();
+                    clienteManipulacao.listar();
                     System.out.println("Qual cliente você quer buscar pelo seu id ?");
-                    clienteManipulacao.buscarCliente(scanner.nextInt());
+                    System.out.println(clienteManipulacao.readList(scanner.nextInt()));
                 }
 
                 case 4 -> {
                     System.out.println("Qual cliente você quer editar ?");
-                    clienteManipulacao.listarClientes();
+                    clienteManipulacao.listar();
                     System.out.println("Digite seu id: ");
                     int index = scanner.nextInt();
                     scanner.nextLine();
@@ -60,16 +76,16 @@ public class Test {
                     cliente.setEmail(scanner.nextLine());
                     System.out.println("Digite seu telefone: ");
                     cliente.setTelefone(scanner.nextLine());
-                    clienteManipulacao.editarCliente(index, cliente);
+                    clienteManipulacao.updateList(index, cliente);
 
                 }
                 case 5 -> {
                     System.out.println("Qual cliente você deseja excluir ?");
-                    clienteManipulacao.listarClientes();
+                    clienteManipulacao.listar();
                     System.out.println("Digite o id dele: ");
                     int index = scanner.nextInt();
 
-                    clienteManipulacao.removerCliente(index);
+                    clienteManipulacao.deleteList(index);
                 }
                 case 9 -> {
                     System.out.println("Você saiu do cadastro!");

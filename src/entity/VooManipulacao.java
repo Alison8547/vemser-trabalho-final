@@ -3,30 +3,17 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VooManipulacao {
+public class VooManipulacao extends Crud{
 
     static List<Voo> listVoos = new ArrayList<>();
 
-    public void createVoo(Voo voo){
-        listVoos.add(voo);
-    }
-
-    public void readVoo(Integer index){
-        Voo vooBuscado = listVoos.get(index);
-    }
-
-    public void updateVoo(Integer index, Voo voo){
+    public void updateList(Integer index, Voo obj) {
         Voo vooBuscado = listVoos.get(index);
 //        vooBuscado.getPassageiros(null);
-        vooBuscado.setDataPartida(voo.getDataPartida());
-        vooBuscado.setDataChegada(voo.getDataChegada());
-        vooBuscado.setLocalPartida(voo.getLocalPartida());
-        vooBuscado.setLocalChegada(voo.getLocalChegada());
-        vooBuscado.setPrecoPassagem(voo.getPrecoPassagem());
+        vooBuscado.setDataPartida(obj.getDataPartida());
+        vooBuscado.setDataChegada(obj.getDataChegada());
+        vooBuscado.setLocalPartida(obj.getLocalPartida());
+        vooBuscado.setLocalChegada(obj.getLocalChegada());
+        vooBuscado.setPrecoPassagem(obj.getPrecoPassagem());
     }
-
-    public void deleteVoo(Integer index){
-        listVoos.remove(index.intValue());
-    }
-
 }
