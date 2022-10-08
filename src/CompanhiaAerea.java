@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompanhiaAerea {
-     private List<Voo> voos = new ArrayList<>();
      private int idCompanhia;
      private String nome;
      public int getId(){
@@ -31,18 +30,8 @@ public class CompanhiaAerea {
           return nome;
      }
 
-     public List<Voo> getVoos(){
-          return voos;
-     }
-
      public void imprimir(){
           System.out.println("Dados da companhia "+nome);
           System.out.println("ID = "+idCompanhia);
-          System.out.println("Voos:");
-          if (voos.size() == 0 ){
-               System.out.println("Nenhum voo encontrado");
-          } else {
-               voos.forEach(voo -> System.out.println(voo));
-          }
      }
 }
