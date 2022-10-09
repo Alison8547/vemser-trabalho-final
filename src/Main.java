@@ -154,7 +154,7 @@ public class Main {
                 menuTodasCompanhias();
             }
             default -> {
-                System.out.println("Opção inválida, tente novamente");
+                System.err.println("Opção inválida!");
                 menuTodasCompanhias();
             }
         }
@@ -224,12 +224,12 @@ public class Main {
                 menuCompanhia(companhia);
             }
             default -> {
-                System.out.println("Opção inválida,tente novamente");
+                System.err.println("Opção inválida!");
                 menuCompanhia(companhia);
             }
         }
     }
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, FormatoErradoDataException {
         clienteManipulacao.createList(new Cliente("Rafa",22, "076.961.456-98", "rafatestvarig@gmail.com", "(71)99134-3542"));
         clienteManipulacao.createList(new Cliente("Kevin",25, "035.751.450-68", "kevintestvarig@gmail.com", "(21)99184-1234"));
         clienteManipulacao.createList(new Cliente("Carol",30, "065.456.588-06", "caroltestvarig@gmail.com", "(91)99976-1314"));

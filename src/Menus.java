@@ -120,7 +120,20 @@ public class Menus {
         return valor;
     }
 
-    public static void menuInicial(boolean test) throws ParseException {
+    static Date dataDigitada() throws FormatoErradoDataException {
+        Scanner scan2 = new Scanner(System.in);
+        Date data;
+        try{
+            data = sdf.parse(scan2.nextLine());
+        }catch (ParseException i ){
+            data = new Date();
+            throw new FormatoErradoDataException("Data com formato errado\n" +
+                    "Formato correto: dd/mm/yyyy\n");
+        }
+        return data;
+    }
+    
+    public static void menuInicial(boolean test) throws ParseException, FormatoErradoDataException {
         if (test == false){
             clienteManipulacao.createList(cliente1);
             clienteManipulacao.createList(cliente2);
@@ -150,12 +163,12 @@ public class Menus {
             case 1 -> menuCliente();
             case 2 -> menuTodasCompanhias();
             default -> {
-                System.out.println("Opção inválida\nTente novamente\n");
+                System.err.println("Opção inválida! Tente novamente.");
                 menuInicial(false);
             }
         }
     }
-    private static void menuCliente() throws ParseException {
+    private static void menuCliente() throws ParseException, FormatoErradoDataException {
         System.out.println("\nBem vindo a area de Clientes");
         option();
         EnumSet
@@ -216,13 +229,13 @@ public class Menus {
                 menuCliente();
             }
             default -> {
-                System.err.println("Opção inválida!\nTente novamente\n");
+                System.err.println("Opção inválida! Tente novamente.");
                 menuCliente();
             }
         }
     }
 
-    public static void menuClienteSelecionado(Cliente cliente) throws ParseException {
+    public static void menuClienteSelecionado(Cliente cliente) throws ParseException, FormatoErradoDataException {
         System.out.println("\n Bem vindo ao menu do cliente "+cliente.getNome());
         EnumSet
                 .allOf(MenuClienteEnum.class)
@@ -232,7 +245,7 @@ public class Menus {
             case 2 -> {System.err.println("OPCAO 2 NAO DESENVOLVIDA");menuCliente();}//LISTAR VOO Q ESTE PASSAGEIRO COMPROU
             case 0 -> {menuCliente();}
             default -> {
-                System.err.println("Opção inválida!\nTente novamente\n");
+                System.err.println("Opção inválida! Tente novamente.");
                 menuClienteSelecionado(cliente);
             }
         }
@@ -248,7 +261,7 @@ public class Menus {
         return voosTrajeto;
     }
 
-    public static void procuraPassagem() throws ParseException {
+    public static void procuraPassagem() throws ParseException, FormatoErradoDataException {
         EnumSet
                 .allOf(SelecionarPassagemEnum.class)
                 .forEach(value -> System.out.println(value.getDescricao()));
@@ -265,7 +278,10 @@ public class Menus {
                 bucarTrajetoVoo(lp,lc).forEach(value -> System.out.println(value));
                 menuCliente();}
             case 0 -> {menuCliente();}
-            default -> {System.err.println("Opção inválida!\nTente novamente\n");}
+            default -> {
+                System.err.println("Opção inválida! Tente novamente.");
+                procuraPassagem();
+            }
         }
     }
 
@@ -274,7 +290,7 @@ public class Menus {
         System.out.println("Escolha uma opção para continuar:");
     }
 
-    public static void menuTodasCompanhias() throws ParseException {
+    public static void menuTodasCompanhias() throws ParseException, FormatoErradoDataException {
         System.out.println("\nBem vindo a area de Companhias");
         option();
         EnumSet
@@ -293,7 +309,6 @@ public class Menus {
                 companhiaManipulacao.createList(companhiaAerea);
                 System.out.println("Companhia criada com sucesso");
                 Menus.menuTodasCompanhias();
-
             }
             case 3 -> {
                 companhiaManipulacao.listar();
@@ -330,7 +345,7 @@ public class Menus {
         return listFiltrada;
     }
 
-    static void menuCompanhia(CompanhiaAerea companhia) throws ParseException {
+    static void menuCompanhia(CompanhiaAerea companhia) throws FormatoErradoDataException, ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         System.out.println("\n Bem vindo ao menu da companhia "+companhia.getNome());
         option();
@@ -344,10 +359,10 @@ public class Menus {
                 voo.setPassageiros(null);
                 voo.setCompanhia(companhia.getNome());
                 System.out.println("Digite a data de partida: ");
-                Date date = sdf.parse(scan1.nextLine());
+                Date date = dataDigitada();
                 voo.setDataPartida(date);
                 System.out.println("Digite a data de chegada: ");
-                date = sdf.parse(scan1.nextLine());
+                date = dataDigitada();
                 voo.setDataChegada(date);
                 System.out.println("Digite o Local de partida: ");
                 voo.setLocalPartida(scan1.nextLine());
@@ -372,10 +387,10 @@ public class Menus {
                 Voo voo = new Voo();
                 voo.setPassageiros(null);
                 System.out.println("Digite a data de partida: ");
-                Date date = sdf.parse(scan1.next());
+                Date date = dataDigitada();
                 voo.setDataPartida(date);
                 System.out.println("Digite a data de chegada: ");
-                date = sdf.parse(scan1.next());
+                date = dataDigitada();
                 voo.setDataChegada(date);
                 System.out.println("Digite o Local de partida: ");
                 voo.setLocalPartida(scan1.nextLine());
