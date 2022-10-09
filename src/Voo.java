@@ -18,8 +18,7 @@ public class Voo {
         id = 1 + secureRandom.nextInt(100);
     }
 
-    public Voo(List<Cliente> passageiros, String companhia, Date dataPartida, Date dataChegada, String localPartida, String localChegada, double precoPassagem) {
-        this.passageiros = passageiros;
+    public Voo(String companhia, Date dataPartida, Date dataChegada, String localPartida, String localChegada, double precoPassagem) {
         this.setCompanhia(companhia);
         this.dataPartida = dataPartida;
         this.dataChegada = dataChegada;
@@ -29,6 +28,9 @@ public class Voo {
     }
     public Voo(){}
 
+    public void addPassageiros(Cliente cliente){
+        this.getPassageiros().add(cliente);
+    }
     @Override
     public String toString() {
         return "Voo{" +
