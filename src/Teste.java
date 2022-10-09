@@ -94,25 +94,24 @@ public class Teste {
 
         Assertions.assertEquals(vooManipulacao.readList(1), voo2);
     }
-//    @Test
-//    public void deveTestarMetedoUpdateVoo() throws ParseException {
-//        Voo voo1 = new Voo("Gol",(sdf.parse("10/10/2022")),(sdf.parse("12/10/2022")),"Porto Alegre/RS/BR","Montivideo/UY", 350.50);
-//        vooManipulacao.createList(voo1);
-//        Voo voo2 = new Voo();
-//        voo2.setDataPartida(sdf.parse("17/10/2022"));
-//        voo2.setDataChegada(sdf.parse("22/10/2022"));
-//        voo2.setLocalPartida("Porto Alegre/RS/BR");
-//        voo2.setLocalChegada("Dubai/EM");
-//        voo2.setPrecoPassagem(33350.50);
-//        vooManipulacao.updateList(0, voo2);
-//
-//        Assertions.assertEquals(voo2.getDataPartida(), voo1.getDataPartida());
-//        Assertions.assertEquals(voo2.getDataChegada(), voo1.getDataChegada());
-//        Assertions.assertEquals(voo2.getLocalPartida(), voo1.getLocalPartida());
-//        Assertions.assertEquals(voo2.getLocalChegada(), voo1.getLocalChegada());
-//        Assertions.assertEquals(voo2.getPrecoPassagem(), voo1.getPrecoPassagem());
-//
-//    }
+    @Test
+    public void deveTestarMetedoUpdateVoo() throws ParseException {
+        Voo voo1 = new Voo("Gol",(sdf.parse("10/10/2022")),(sdf.parse("12/10/2022")),"Porto Alegre/RS/BR","Montivideo/UY", 350.50);
+        vooManipulacao.createList(voo1);
+        Voo voo2 = new Voo();
+        voo2.setDataPartida(sdf.parse("17/10/2022"));
+        voo2.setDataChegada(sdf.parse("22/10/2022"));
+        voo2.setLocalPartida("Porto Alegre/RS/BR");
+        voo2.setLocalChegada("Dubai/EM");
+        voo2.setPrecoPassagem(33350.50);
+        vooManipulacao.updateList(voo1.getId(), voo2);
+
+        Assertions.assertEquals(voo2.getDataPartida(), voo1.getDataPartida());
+        Assertions.assertEquals(voo2.getDataChegada(), voo1.getDataChegada());
+        Assertions.assertEquals(voo2.getLocalPartida(), voo1.getLocalPartida());
+        Assertions.assertEquals(voo2.getLocalChegada(), voo1.getLocalChegada());
+        Assertions.assertEquals(voo2.getPrecoPassagem(), voo1.getPrecoPassagem());
+    }
     @Test
     public void deveTestarMetedoDeleteVoo() throws ParseException {
         Voo voo1 = new Voo("Gol",(sdf.parse("10/10/2022")),(sdf.parse("12/10/2022")),"Porto Alegre/RS/BR","Montivideo/UY", 350.50);
