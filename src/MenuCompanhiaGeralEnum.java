@@ -1,4 +1,4 @@
-public enum MenuCompanhiaGeralEnum {
+public enum MenuCompanhiaGeralEnum implements InterfaceEnum {
     MOSTRAR_COMPANHIAS("Digite [1] para mostrar companhias"),
     CRIAR_COMPANHIA("Digite [2] para criar um companhia"),
     SELECIONAR_COMPANHIA("Digite [3] para selecionar uma companhia"),

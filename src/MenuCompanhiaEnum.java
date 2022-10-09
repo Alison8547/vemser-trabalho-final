@@ -1,4 +1,4 @@
-public enum MenuCompanhiaEnum {
+public enum MenuCompanhiaEnum implements InterfaceEnum {
     CRIAR_VOO("Digite [1] para criar um voo"),
     MOSTRAR_VOO("Digite [2] para mostrar todo os voos"),
     EDITAR_VOO("Digite [3] para editar um voo"),

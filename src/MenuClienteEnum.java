@@ -1,8 +1,8 @@
-public enum MenuClienteEnum {
+public enum MenuClienteEnum implements InterfaceEnum {
 
-    COMPRAR_PASSAGEM("Comprar passagem = 1"),
-    MOSTRAR_VOO("Mostrar todos os voos = 2"),
-    VOLTAR("Voltar ao menu anterior = 0");
+    COMPRAR_PASSAGEM("Digite [1] para comprar uma passagem"),
+    MOSTRAR_VOO("Digite [2] para mostrar todos os voos"),
+    VOLTAR("Digite [0] para voltar ao menu anterior");
 
     private String descricao;
     MenuClienteEnum(String descricao){
