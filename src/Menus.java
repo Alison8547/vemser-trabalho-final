@@ -151,7 +151,7 @@ public class Menus {
         return data;
     }
     
-    public static void menuInicial(boolean test) throws ParseException, FormatoErradoDataException {
+    public static void menuInicial(boolean test) throws FormatoErradoDataException {
         if (test == false){
             clienteManipulacao.createList(cliente1);
             clienteManipulacao.createList(cliente2);
@@ -186,7 +186,7 @@ public class Menus {
             }
         }
     }
-    private static void menuCliente() throws ParseException, FormatoErradoDataException {
+    private static void menuCliente() throws FormatoErradoDataException {
         System.out.println("\n********** Bem vindo a area de Clientes **********");
         option();
         EnumSet
@@ -253,7 +253,7 @@ public class Menus {
         }
     }
 
-    public static void menuClienteSelecionado(Cliente cliente) throws ParseException, FormatoErradoDataException {
+    public static void menuClienteSelecionado(Cliente cliente) throws FormatoErradoDataException {
         System.out.println("\n Bem vindo ao menu do cliente "+cliente.getNome());
         EnumSet
                 .allOf(MenuClienteEnum.class)
@@ -287,7 +287,7 @@ public class Menus {
     }
 
 
-    public static void procuraPassagem(Cliente cliente) throws ParseException, FormatoErradoDataException {
+    public static void procuraPassagem(Cliente cliente) throws FormatoErradoDataException {
         EnumSet
                 .allOf(SelecionarPassagemEnum.class)
                 .forEach(value -> System.out.println(value.getDescricao()));
@@ -333,7 +333,7 @@ public class Menus {
         System.out.println("Escolha uma opção para continuar:");
     }
 
-    public static void menuTodasCompanhias() throws ParseException, FormatoErradoDataException {
+    public static void menuTodasCompanhias() throws FormatoErradoDataException {
         System.out.println("\n**********Bem vindo a area de Companhias **********");
         option();
         EnumSet
@@ -394,7 +394,7 @@ public class Menus {
             System.out.println(vooManipulacao.getListVoos().stream().filter(voo -> voo.getId()==id).toList());
     }
 
-    static void menuCompanhia(CompanhiaAerea companhia) throws FormatoErradoDataException, ParseException {
+    static void menuCompanhia(CompanhiaAerea companhia) throws FormatoErradoDataException {
         System.out.println("\n Bem vindo ao menu da companhia "+companhia.getNome());
         option();
         EnumSet
