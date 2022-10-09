@@ -1,10 +1,10 @@
 public enum MenuCompanhiaGeralEnum {
-    MOSTRAR_COMPANHIAS("Mostrar Companhias = 1"),
-    CRIAR_COMPANHIA("Criar nova Companhia = 2"),
-    SELECIONAR_COMPANHIA("Selecionar Companhia = 3"),
-    EDITAR_COMPANHIA("Editar Companhia = 4"),
-    DELETAR_COMPANHIA("Deletar Companhia = 5"),
-    VOLTAR("Voltar ao menu anterior = 0");
+    MOSTRAR_COMPANHIAS("Digite [1] para mostrar companhias"),
+    CRIAR_COMPANHIA("Digite [2] para criar um companhia"),
+    SELECIONAR_COMPANHIA("Digite [3] para selecionar uma companhia"),
+    EDITAR_COMPANHIA("Digite [4] para editar uma companhia"),
+    DELETAR_COMPANHIA("Digite [5] para deletar uma companhia"),
+    VOLTAR("Digite [0] para voltar ao menu anterior");
 
     private String descricao;
 

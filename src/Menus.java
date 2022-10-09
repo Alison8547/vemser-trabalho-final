@@ -138,11 +138,10 @@ public class Menus {
             vooManipulacao.createList(voo7);
             vooManipulacao.createList(voo8);
         test = true;}
-        System.out.println("Olá, bem vindo ao sistema de passagens aéreas Varig");
-        System.out.println("Digite 1 para entrar ná pagina de clientes," +
-                " 2 para entrar na página de Companhias ou 0 para sair");
+        System.out.println("********** Bem vindo ao sistema de passagens aéreas Varig **********");
+        System.out.println("Digite [1] para entrar na pagina de Clientes\nDigite [2] para entrar na página de Companhias\nDigite [0] para sair");
         switch (valorDigitado()){
-            case 0 -> System.out.println("Adeus");
+            case 0 -> System.err.println("Você saiu do sistema!");
             case 1 -> menuCliente();
             case 2 -> menuTodasCompanhias();
         }
