@@ -1,8 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static VooManipulacao vooManipulacao = new VooManipulacao();
@@ -10,10 +8,16 @@ public class Main {
     static CompanhiaManipulacao companhiaManipulacao = new CompanhiaManipulacao();
     static Scanner scan1 = new Scanner(System.in);
 
-    static int valorDigitado(){
+    static int valorDigitado() {
         Scanner scan = new Scanner(System.in);
-        int valor = scan.nextInt();
-        scan.nextLine();
+        int valor;
+        try{
+            valor = scan.nextInt();
+            scan.nextLine();
+        }catch (InputMismatchException i){
+            System.out.println("Erro, Não foi informado um número válido");
+            valor = -1;
+        }
         return valor;
     }
 
@@ -25,6 +29,10 @@ public class Main {
             case 0 -> System.out.println("Adeus");
             case 1 -> menuCliente();
             case 2 -> menuTodasCompanhias();
+            default -> {
+                System.out.println("Opçao invalida, tente novamente");
+                menuInicial();
+            }
         }
     }
     private static void menuCliente() throws ParseException {
@@ -88,8 +96,15 @@ public class Main {
             }
             default -> {
                 System.err.println("Opção inválida!");
+                menuCliente();
             }
         }
+    }
+
+    static void buscaVooCompanhia(String companhia) {
+        vooManipulacao.getListVoos().stream()
+                .filter(voo -> voo.getCompanhia().contains(companhia))
+                .forEach(System.out::println);
     }
 
     private static void   option(){
@@ -139,12 +154,16 @@ public class Main {
                 System.out.println("Companhia deletada com sucesso");
                 menuTodasCompanhias();
             }
+            default -> {
+                System.out.println("Opção inválida, tente novamente");
+                menuTodasCompanhias();
+            }
         }
     }
 
     static void menuCompanhia(CompanhiaAerea companhia) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("\n Bem vindo ao menu da companhia "+companhia.getNome());
+        System.out.println("\nBem vindo ao menu da companhia "+companhia.getNome());
         option();
         EnumSet
                 .allOf(MenuCompanhiaEnum.class)
@@ -171,7 +190,7 @@ public class Main {
                 menuCompanhia(companhia);
             }
             case 2 -> {
-                vooManipulacao.listar();
+                buscaVooCompanhia(companhia.getNome());
                 menuCompanhia(companhia);
             }
             case 3 -> {
@@ -205,10 +224,13 @@ public class Main {
                 companhia.imprimir();
                 menuCompanhia(companhia);
             }
+            default -> {
+                System.out.println("Opção inválida,tente novamente");
+                menuCompanhia(companhia);
+            }
         }
     }
     public static void main(String[] args) throws ParseException {
-        Menus.menuInicial(false);
         clienteManipulacao.createList(new Cliente("Rafa",22, "076.961.456-98", "rafatestvarig@gmail.com", "(71)99134-3542"));
         clienteManipulacao.createList(new Cliente("Kevin",25, "035.751.450-68", "kevintestvarig@gmail.com", "(21)99184-1234"));
         clienteManipulacao.createList(new Cliente("Carol",30, "065.456.588-06", "caroltestvarig@gmail.com", "(91)99976-1314"));
