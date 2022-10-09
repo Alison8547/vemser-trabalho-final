@@ -241,6 +241,7 @@ public class Menus {
                 String novoNome = scan1.nextLine();
                 CompanhiaAerea companhiaTeste = new CompanhiaAerea(novoNome);
                 companhiaManipulacao.updateList(index,companhiaTeste);
+                menuTodasCompanhias();
             }
             case 5 -> {
                 System.out.println("Digite o index da companhia que deseja deletar:");
