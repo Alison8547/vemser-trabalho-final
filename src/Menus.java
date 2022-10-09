@@ -24,7 +24,9 @@ public class Menus {
 
     static {
         try {
-            voo1 = new Voo(List.of(cliente1, cliente3),"Gol",(sdf.parse("10/10/2022")),(sdf.parse("12/10/2022")),"Porto Alegre/RS/BR","Montivideo/UY", 350.50);
+            voo1 = new Voo("Gol",(sdf.parse("10/10/2022")),(sdf.parse("12/10/2022")),"Porto Alegre/RS/BR","Montivideo/UY", 350.50);
+            voo1.addPassageiros(cliente1);
+            voo1.addPassageiros(cliente3);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -34,7 +36,11 @@ public class Menus {
 
     static {
         try {
-            voo2 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Emirates Airlines",sdf.parse("17/10/2022"),sdf.parse("22/10/2022"),"Porto Alegre/RS/BR","Dubai/EM", 33350.50);
+            voo2 = new Voo("Emirates Airlines",sdf.parse("17/10/2022"),sdf.parse("22/10/2022"),"Porto Alegre/RS/BR","Dubai/EM", 33350.50);
+            voo2.addPassageiros(cliente8);
+            voo2.addPassageiros(cliente5);
+            voo2.addPassageiros(cliente6);
+            voo2.addPassageiros(cliente2);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -44,7 +50,11 @@ public class Menus {
 
     static {
         try {
-            voo3 = new Voo(List.of(cliente1, cliente5, cliente4, cliente7),"Tam",sdf.parse("15/10/2022"),sdf.parse("15/10/2022"),"Porto Alegre/RS/BR","Rio de Janeiro/RJ/BR", 250.90);
+            voo3 = new Voo("Tam",sdf.parse("15/10/2022"),sdf.parse("15/10/2022"),"Porto Alegre/RS/BR","Rio de Janeiro/RJ/BR", 250.90);
+            voo3.addPassageiros(cliente1);
+            voo3.addPassageiros(cliente5);
+            voo3.addPassageiros(cliente4);
+            voo3.addPassageiros(cliente7);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -54,7 +64,7 @@ public class Menus {
 
     static {
         try {
-            voo4 = new Voo(null,"Azul",(sdf.parse("23/12/2022")),sdf.parse("27/12/2022"),"Porto Alegre/RS/BR","Natal/RN/BR", 490.68);
+            voo4 = new Voo("Azul",(sdf.parse("23/12/2022")),sdf.parse("27/12/2022"),"Porto Alegre/RS/BR","Natal/RN/BR", 490.68);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -64,7 +74,11 @@ public class Menus {
 
     static {
         try {
-            voo5 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Azul",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 325.37);
+            voo5 = new Voo("Azul",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 325.37);
+            voo5.addPassageiros(cliente8);
+            voo5.addPassageiros(cliente5);
+            voo5.addPassageiros(cliente6);
+            voo5.addPassageiros(cliente2);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -75,7 +89,11 @@ public class Menus {
 
     static {
         try {
-            voo6 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Emirates Airlines",sdf.parse("13/12/2022"),sdf.parse("17/12/2022"),"Dubai/EM","Porto Alegre/RS/BR", 27350.50);
+            voo6 = new Voo("Emirates Airlines",sdf.parse("13/12/2022"),sdf.parse("17/12/2022"),"Dubai/EM","Porto Alegre/RS/BR", 27350.50);
+            voo6.addPassageiros(cliente8);
+            voo6.addPassageiros(cliente5);
+            voo6.addPassageiros(cliente6);
+            voo6.addPassageiros(cliente2);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -84,7 +102,7 @@ public class Menus {
 
     static {
         try {
-            voo7 = new Voo(null,"Tam",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 400.37);
+            voo7 = new Voo("Tam",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 400.37);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -94,7 +112,7 @@ public class Menus {
 
     static {
         try {
-            voo8 = new Voo(null,"Gol",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 368.37);
+            voo8 = new Voo("Gol",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 368.37);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -291,13 +309,18 @@ public class Menus {
         }
     }
 
-    public static VooManipulacao pagamentoPassagem(int id, Cliente cliente){
-
-        vooManipulacao.getListVoos().stream().filter(x -> x.getId() == id).map(p -> p.getPassageiros().add(cliente)).toList();
-        Pagamento pagamento = new Pagamento(cliente, (Voo) vooManipulacao.readList(id));
-        System.out.println("Pagamento Confirmado");
-        pagamento.imprimirDados();
-        return vooManipulacao;
+    public static void pagamentoPassagem(int id, Cliente cliente){
+        Optional<Voo> vooSelecionado = vooManipulacao.getListVoos().stream()
+                .filter(voo -> voo.getId() == id)
+                .findFirst();
+        if (vooSelecionado.isPresent()){
+            vooSelecionado.get().addPassageiros(cliente);
+                Pagamento pagamento = new Pagamento(cliente, (Voo) vooSelecionado.get());
+                System.out.println("Pagamento Confirmado");
+                pagamento.imprimirDados();
+            }else {
+                System.out.println("Voo não encontrado");
+            }
     }
 
 
