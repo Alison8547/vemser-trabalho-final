@@ -1,8 +1,8 @@
 public enum SelecionarPassagemEnum {
 
-    DATA("Buscar voo por data de partida= 1"),
-    PARTIDA_CHEGADA("Buscar voo por trajeto = 2"),
-    VOLTAR("Voltar ao menu anterior = 0");
+    DATA("Digite [1] para buscar voo por data de partida"),
+    PARTIDA_CHEGADA("Digite [2] para buscar voo por trajeto"),
+    VOLTAR("Digite [0] para voltar ao menu anterior");
 
     private String descricao;
     SelecionarPassagemEnum(String descricao){

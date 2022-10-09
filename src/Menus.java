@@ -177,7 +177,8 @@ public class Menus {
         System.out.println("********** Bem vindo ao sistema de passagens aéreas Varig **********");
         System.out.println("Digite [1] para entrar na pagina de Clientes\nDigite [2] para entrar na página de Companhias\nDigite [0] para sair");
         switch (valorDigitado()){
-            case 0 -> System.err.println("Você saiu do sistema!");
+            case 0 -> {System.err.println("Você saiu do sistema!");
+            System.exit(0);}
             case 1 -> menuCliente();
             case 2 -> menuTodasCompanhias();
             default -> {
@@ -259,14 +260,14 @@ public class Menus {
                 .allOf(MenuClienteEnum.class)
                 .forEach(value -> System.out.println(value.getDescricao()));
         switch (valorDigitado()){
-            case 1 -> {procuraPassagem(cliente);menuCliente();}//COMPRA
+            case 1 -> {procuraPassagem(cliente);menuClienteSelecionado(cliente);}//COMPRA
             case 2 -> {
                 vooManipulacao.getListVoos().stream()
                         .filter(voo -> voo.getPassageiros().stream()
                                 .anyMatch(clientes -> clientes.getNome().contains(cliente.getNome() ) ))
                         .toList()
                         .forEach(System.out::println);
-                menuCliente();
+                menuClienteSelecionado(cliente);
             }//LISTAR VOO Q ESTE PASSAGEIRO COMPROU
             case 0 -> {menuCliente();}
             default -> {
@@ -297,7 +298,7 @@ public class Menus {
                 bucarData(date).forEach(value -> System.out.println(value));
                 System.out.println("Digite o ID do voo para comprar: ");
                 pagamentoPassagem(valorDigitado(),cliente);
-                menuCliente();
+                menuClienteSelecionado(cliente);
             }
             case 2 -> {System.out.println("Digite o local de partida: ");
                 String lp = scan1.nextLine();
@@ -306,8 +307,8 @@ public class Menus {
                 bucarTrajetoVoo(lp,lc).forEach(value -> System.out.println(value));
                 System.out.println("Digite o ID do voo para comprar: ");
                 pagamentoPassagem(valorDigitado(),cliente);
-                menuCliente();}
-            case 0 -> {menuCliente();}
+                menuClienteSelecionado(cliente);}
+            case 0 -> {menuClienteSelecionado(cliente);}
             default -> {
                 System.err.println("Opção inválida! Tente novamente.");
                 procuraPassagem(cliente);
@@ -329,7 +330,7 @@ public class Menus {
             }
     }
 
-    private static void   option(){
+    private static void option(){
         System.out.println("Escolha uma opção para continuar:");
     }
 
@@ -351,7 +352,7 @@ public class Menus {
                 CompanhiaAerea companhiaAerea = new CompanhiaAerea(nome);
                 companhiaManipulacao.createList(companhiaAerea);
                 System.out.println("Companhia criada com sucesso");
-                Menus.menuTodasCompanhias();
+                menuTodasCompanhias();
             }
             case 3 -> {
                 companhiaManipulacao.listar();
@@ -375,7 +376,7 @@ public class Menus {
                 int index = Menus.valorDigitado();
                 companhiaManipulacao.deleteList(index);
                 System.out.println("Companhia deletada com sucesso");
-                Menus.menuTodasCompanhias();
+                menuTodasCompanhias();
             }
             default -> {
                 System.err.println("Opção inválida!\nTente novamente\n");
