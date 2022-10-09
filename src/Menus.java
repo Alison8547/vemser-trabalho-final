@@ -293,7 +293,7 @@ public class Menus {
                 .forEach(value -> System.out.println(value.getDescricao()));
         switch (valorDigitado()){
             case 1 -> {System.out.println("Digite a data de partida: ");
-                Date date = sdf.parse(scan1.nextLine());
+                Date date = dataDigitada();
                 bucarData(date).forEach(value -> System.out.println(value));
                 System.out.println("Digite o ID do voo para comprar: ");
                 pagamentoPassagem(valorDigitado(),cliente);
@@ -395,7 +395,6 @@ public class Menus {
     }
 
     static void menuCompanhia(CompanhiaAerea companhia) throws FormatoErradoDataException, ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         System.out.println("\n Bem vindo ao menu da companhia "+companhia.getNome());
         option();
         EnumSet
