@@ -1,7 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Menus {
     static VooManipulacao vooManipulacao = new VooManipulacao();
@@ -188,7 +187,7 @@ public class Menus {
         }
     }
     private static void menuCliente() throws ParseException, FormatoErradoDataException {
-        System.out.println("\nBem vindo a area de Clientes");
+        System.out.println("\n********** Bem vindo a area de Clientes **********");
         option();
         EnumSet
                 .allOf(MenuClienteGeralEnum.class)
@@ -217,7 +216,6 @@ public class Menus {
             case 3 -> {
                 clienteManipulacao.listar();
                 System.out.println("Qual cliente você quer buscar pelo seu id ?");
-//                System.out.println(clienteManipulacao.readList(valorDigitado()));
                 menuClienteSelecionado((Cliente) clienteManipulacao.readList(valorDigitado()));
                 menuCliente();
             }
@@ -230,8 +228,9 @@ public class Menus {
                 System.out.println("Digite seu nome: ");
                 cliente.setNome(scan1.nextLine());
                 System.out.println("Digite sua idade: ");
-                cliente.setIdade(scan1.nextInt());
-                scan1.nextLine();
+                cliente.setIdade(valorDigitado());
+                System.out.println("Digite seu cpf: ");
+                cliente.setCpf(scan1.nextLine());
                 System.out.println("Digite seu email: ");
                 cliente.setEmail(scan1.nextLine());
                 System.out.println("Digite seu telefone: ");
@@ -323,13 +322,12 @@ public class Menus {
             }
     }
 
-
     private static void   option(){
         System.out.println("Escolha uma opção para continuar:");
     }
 
     public static void menuTodasCompanhias() throws ParseException, FormatoErradoDataException {
-        System.out.println("\nBem vindo a area de Companhias");
+        System.out.println("\n**********Bem vindo a area de Companhias **********");
         option();
         EnumSet
                 .allOf(MenuCompanhiaGeralEnum.class)
@@ -365,6 +363,7 @@ public class Menus {
                 menuTodasCompanhias();
             }
             case 5 -> {
+                companhiaManipulacao.listar();
                 System.out.println("Digite o index da companhia que deseja deletar:");
                 int index = Menus.valorDigitado();
                 companhiaManipulacao.deleteList(index);
@@ -378,9 +377,14 @@ public class Menus {
         }
     }
 
-    public static List<Voo> bucarPorCompanhia(String companhia) {
-        List<Voo> listFiltrada = vooManipulacao.getListVoos().stream().filter(x -> x.getCompanhia().equals(companhia)).toList();
-        return listFiltrada;
+    static void buscaVooCompanhia(String companhia) {
+        vooManipulacao.getListVoos().stream()
+                .filter(voo -> voo.getCompanhia().contains(companhia))
+                .forEach(System.out::println);
+    }
+
+    public static void imprimirVooCompanhia(int id, CompanhiaAerea companhia){
+            System.out.println(vooManipulacao.getListVoos().stream().filter(voo -> voo.getId()==id).toList());
     }
 
     static void menuCompanhia(CompanhiaAerea companhia) throws FormatoErradoDataException, ParseException {
@@ -412,35 +416,35 @@ public class Menus {
                 menuCompanhia(companhia);
             }
             case 2 -> {
-                System.out.println(bucarPorCompanhia(companhia.getNome()));
+                buscaVooCompanhia(companhia.getNome());
                 menuCompanhia(companhia);
             }
             case 3 -> {
-                System.out.println("Qual voo você quer editar ?");
+                System.out.println("Digite o index do voo que voce deseja editar:");
                 vooManipulacao.listar();
                 System.out.println("Digite seu id: ");
                 int index = scan1.nextInt();
                 scan1.nextLine();
-
-                Voo voo = new Voo();
-                voo.setPassageiros(null);
+                Voo vooTeste = new Voo();
+                vooTeste.setPassageiros(null);
+                vooTeste.setCompanhia(companhia.getNome());
                 System.out.println("Digite a data de partida: ");
                 Date date = dataDigitada();
-                voo.setDataPartida(date);
+                vooTeste.setDataPartida(date);
                 System.out.println("Digite a data de chegada: ");
                 date = dataDigitada();
-                voo.setDataChegada(date);
+                vooTeste.setDataChegada(date);
                 System.out.println("Digite o Local de partida: ");
-                voo.setLocalPartida(scan1.nextLine());
+                vooTeste.setLocalPartida(scan1.nextLine());
                 System.out.println("Digite o Local de chegada: ");
-                voo.setLocalChegada(scan1.nextLine());
+                vooTeste.setLocalChegada(scan1.nextLine());
                 System.out.println("Digite o preço da passagem: ");
-                voo.setPrecoPassagem(scan1.nextDouble());
-                vooManipulacao.createList(voo);
+                vooTeste.setPrecoPassagem(scan1.nextDouble());
+                vooManipulacao.updateList(index, vooTeste);
                 menuCompanhia(companhia);
             }
             case 4 -> {
-                System.out.println("Qual voo você deseja excluir ?");
+                System.out.println("Digite o index do voo que você deseja cancelar:");
                 vooManipulacao.listar();
                 System.out.println("Digite o id dele: ");
                 int index = scan1.nextInt();
@@ -448,13 +452,9 @@ public class Menus {
                 menuCompanhia(companhia);
             }
             case 5 -> {
-                vooManipulacao.listar();
+                buscaVooCompanhia(companhia.getNome());
                 System.out.println("Qual voo você imprimir, busque pelo seu id ?");
-                System.out.println(vooManipulacao.readList(scan1.nextInt()));
-                menuCompanhia(companhia);
-            }
-            case 6 -> {
-                companhia.imprimir();
+                imprimirVooCompanhia(valorDigitado(), companhia);
                 menuCompanhia(companhia);
             }
             default -> {
