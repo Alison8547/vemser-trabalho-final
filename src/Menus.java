@@ -1,9 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menus {
     static VooManipulacao vooManipulacao = new VooManipulacao();
@@ -72,11 +69,31 @@ public class Menus {
         }
     }
 
+
     static Voo voo6;
 
     static {
         try {
             voo6 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Emirates Airlines",sdf.parse("13/12/2022"),sdf.parse("17/12/2022"),"Dubai/EM","Porto Alegre/RS/BR", 27350.50);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    static Voo voo7;
+
+    static {
+        try {
+            voo7 = new Voo(null,"Tam",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 400.37);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static Voo voo8;
+
+    static {
+        try {
+            voo8 = new Voo(null,"Gol",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 368.37);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -118,6 +135,8 @@ public class Menus {
             vooManipulacao.createList(voo4);
             vooManipulacao.createList(voo5);
             vooManipulacao.createList(voo6);
+            vooManipulacao.createList(voo7);
+            vooManipulacao.createList(voo8);
         test = true;}
         System.out.println("Olá, bem vindo ao sistema de passagens aéreas Varig");
         System.out.println("Digite 1 para entrar ná pagina de clientes," +
@@ -158,16 +177,8 @@ public class Menus {
             case 3 -> {
                 clienteManipulacao.listar();
                 System.out.println("Qual cliente você quer buscar pelo seu id ?");
-                System.out.println(clienteManipulacao.readList(valorDigitado()));
-                EnumSet
-                        .allOf(MenuClienteEnum.class)
-                        .forEach(value -> System.out.println(value.getDescricao()));
-                switch (valorDigitado()){
-                    case 1 -> {System.err.println("OPCAO 1 NAO DESENVOLVIDA");menuCliente();}
-                    case 2 -> {System.err.println("OPCAO 2 NAO DESENVOLVIDA");menuCliente();}
-                    case 0 -> {menuCliente();}
-                    default -> {System.err.println("Opção inválida!");}
-                }
+//                System.out.println(clienteManipulacao.readList(valorDigitado()));
+                menuClienteSelecionado((Cliente) clienteManipulacao.readList(valorDigitado()));
                 menuCliente();
             }
             case 4 -> {
@@ -201,6 +212,51 @@ public class Menus {
             }
         }
     }
+
+    public static void menuClienteSelecionado(Cliente cliente) throws ParseException {
+        System.out.println("\n Bem vindo ao menu do cliente "+cliente.getNome());
+        EnumSet
+                .allOf(MenuClienteEnum.class)
+                .forEach(value -> System.out.println(value.getDescricao()));
+        switch (valorDigitado()){
+            case 1 -> {procuraPassagem();menuCliente();}//COMPRA
+            case 2 -> {System.err.println("OPCAO 2 NAO DESENVOLVIDA");menuCliente();}//LISTAR VOO Q ESTE PASSAGEIRO COMPROU
+            case 0 -> {menuCliente();}
+            default -> {System.err.println("Opção inválida!");}
+        }
+    }
+
+    public static List<Voo> bucarData(Date data) {
+        List<Voo> voosData = vooManipulacao.getListVoos().stream().filter(x -> (x.getDataPartida().equals(data))).sorted(Comparator.comparing(Voo::getPrecoPassagem)).toList();
+        return voosData;
+    }
+
+    public static List<Voo> bucarTrajetoVoo(String localPartida,String localChegada) {
+        List<Voo> voosTrajeto = vooManipulacao.getListVoos().stream().filter(x -> (x.getLocalChegada().equals(localChegada) && x.getLocalPartida().equals(localPartida))).sorted(Comparator.comparing(Voo::getPrecoPassagem)).toList();
+        return voosTrajeto;
+    }
+
+    public static void procuraPassagem() throws ParseException {
+        EnumSet
+                .allOf(SelecionarPassagemEnum.class)
+                .forEach(value -> System.out.println(value.getDescricao()));
+        switch (valorDigitado()){
+            case 1 -> {System.out.println("Digite a data de partida: ");
+                Date date = sdf.parse(scan1.nextLine());
+                bucarData(date).forEach(value -> System.out.println(value));
+                menuCliente();
+            }
+            case 2 -> {System.out.println("Digite o local de partida: ");
+                String lp = scan1.nextLine();
+                System.out.println("Digite o local de chegada: ");
+                String lc = scan1.nextLine();
+                bucarTrajetoVoo(lp,lc).forEach(value -> System.out.println(value));
+                menuCliente();}
+            case 0 -> {menuCliente();}
+            default -> {System.err.println("Opção inválida!");}
+        }
+    }
+
 
     private static void   option(){
         System.out.println("Escolha uma opção para continuar:");
@@ -252,6 +308,11 @@ public class Menus {
         }
     }
 
+    public static List<Voo> bucarPorCompanhia(String companhia) {
+        List<Voo> listFiltrada = vooManipulacao.getListVoos().stream().filter(x -> x.getCompanhia().equals(companhia)).toList();
+        return listFiltrada;
+    }
+
     static void menuCompanhia(CompanhiaAerea companhia) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         System.out.println("\n Bem vindo ao menu da companhia "+companhia.getNome());
@@ -281,8 +342,7 @@ public class Menus {
                 menuCompanhia(companhia);
             }
             case 2 -> {
-                //ARRUMAR LOGICA PARA LISTAR TODOS OS VOOS QUE POSSUEM A MESMA COMPANHIA AEREA
-                vooManipulacao.listar();
+                System.out.println(bucarPorCompanhia(companhia.getNome()));
                 menuCompanhia(companhia);
             }
             case 3 -> {

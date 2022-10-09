@@ -33,7 +33,7 @@ public class AreaTeste {
 
         Voo voo4 = new Voo(null,"Azul",sdf.parse("23/12/2022"),sdf.parse("27/12/2022"),"Porto Alegre/RS/BR","Natal/RN/BR", 490.68);
 
-        Voo voo5 = new Voo(null,"Azul",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 325.37);
+        Voo voo7 = new Voo(null,"Tam",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 400.37);
 
         Voo voo6 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Emirates Airlines",sdf.parse("13/12/2022"),sdf.parse("17/12/2022"),"Dubai/EM","Porto Alegre/RS/BR", 27350.50);
 

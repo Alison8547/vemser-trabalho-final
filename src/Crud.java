@@ -23,4 +23,7 @@ public abstract class Crud<T> {
         return null;
     }
 
+    public List<T> getList(){
+        return value;
+    }
 }
