@@ -3,7 +3,10 @@ import java.util.List;
 
 public class VooManipulacao extends Crud{
 
-    static List<Voo> listVoos = new ArrayList<>();
+    public List<Voo> getListVoos(){
+        return super.getList();
+    }
+    private List<Voo> listVoos;
 
     public void updateList(Integer index, Voo obj) {
         Voo vooBuscado = listVoos.get(index);

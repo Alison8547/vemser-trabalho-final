@@ -8,6 +8,10 @@ public abstract class Crud<T> {
         value.add(obj);
     }
 
+    public List<T> getList(){
+        return value;
+    }
+
      public T readList(Integer index){
         T aux = value.get(index);
         return aux;
@@ -22,5 +26,4 @@ public abstract class Crud<T> {
         }
         return null;
     }
-
 }
