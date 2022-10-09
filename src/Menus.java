@@ -108,10 +108,15 @@ public class Menus {
     public Menus() throws ParseException {
     }
 
-    static int valorDigitado(){
+    static int valorDigitado() {
         Scanner scan = new Scanner(System.in);
-        int valor = scan.nextInt();
-        scan.nextLine();
+        int valor;
+        try{
+            valor = scan.nextInt();
+            scan.nextLine();
+        }catch (InputMismatchException i){
+            valor = -1;
+        }
         return valor;
     }
 
@@ -145,6 +150,10 @@ public class Menus {
             case 0 -> System.out.println("Adeus");
             case 1 -> menuCliente();
             case 2 -> menuTodasCompanhias();
+            default -> {
+                System.out.println("Opção inválida\nTente novamente\n");
+                menuInicial(false);
+            }
         }
     }
     private static void menuCliente() throws ParseException {
@@ -208,7 +217,8 @@ public class Menus {
                 menuCliente();
             }
             default -> {
-                System.err.println("Opção inválida!");
+                System.err.println("Opção inválida!\nTente novamente\n");
+                menuCliente();
             }
         }
     }
@@ -222,7 +232,10 @@ public class Menus {
             case 1 -> {procuraPassagem();menuCliente();}//COMPRA
             case 2 -> {System.err.println("OPCAO 2 NAO DESENVOLVIDA");menuCliente();}//LISTAR VOO Q ESTE PASSAGEIRO COMPROU
             case 0 -> {menuCliente();}
-            default -> {System.err.println("Opção inválida!");}
+            default -> {
+                System.err.println("Opção inválida!\nTente novamente\n");
+                menuClienteSelecionado(cliente);
+            }
         }
     }
 
@@ -253,7 +266,7 @@ public class Menus {
                 bucarTrajetoVoo(lp,lc).forEach(value -> System.out.println(value));
                 menuCliente();}
             case 0 -> {menuCliente();}
-            default -> {System.err.println("Opção inválida!");}
+            default -> {System.err.println("Opção inválida!\nTente novamente\n");}
         }
     }
 
@@ -305,6 +318,10 @@ public class Menus {
                 companhiaManipulacao.deleteList(index);
                 System.out.println("Companhia deletada com sucesso");
                 Menus.menuTodasCompanhias();
+            }
+            default -> {
+                System.err.println("Opção inválida!\nTente novamente\n");
+                menuTodasCompanhias();
             }
         }
     }
@@ -386,6 +403,10 @@ public class Menus {
             }
             case 6 -> {
                 companhia.imprimir();
+                menuCompanhia(companhia);
+            }
+            default -> {
+                System.err.println("Opção inválida!\nTente novamente\n");
                 menuCompanhia(companhia);
             }
         }
