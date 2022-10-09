@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Menus {
     static VooManipulacao vooManipulacao = new VooManipulacao();
@@ -63,7 +64,7 @@ public class Menus {
 
     static {
         try {
-            voo5 = new Voo(null,"Azul",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 325.37);
+            voo5 = new Voo(List.of(cliente8, cliente5, cliente6, cliente2),"Azul",sdf.parse("11/11/2022"),sdf.parse("12/11/2022"),"Porto Alegre/RS/BR","São Paulo/SP/BR", 325.37);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -219,7 +220,7 @@ public class Menus {
                 .allOf(MenuClienteEnum.class)
                 .forEach(value -> System.out.println(value.getDescricao()));
         switch (valorDigitado()){
-            case 1 -> {procuraPassagem();menuCliente();}//COMPRA
+            case 1 -> {procuraPassagem(cliente);menuCliente();}//COMPRA
             case 2 -> {System.err.println("OPCAO 2 NAO DESENVOLVIDA");menuCliente();}//LISTAR VOO Q ESTE PASSAGEIRO COMPROU
             case 0 -> {menuCliente();}
             default -> {System.err.println("Opção inválida!");}
@@ -236,7 +237,7 @@ public class Menus {
         return voosTrajeto;
     }
 
-    public static void procuraPassagem() throws ParseException {
+    public static void procuraPassagem(Cliente cliente) throws ParseException {
         EnumSet
                 .allOf(SelecionarPassagemEnum.class)
                 .forEach(value -> System.out.println(value.getDescricao()));
@@ -244,6 +245,8 @@ public class Menus {
             case 1 -> {System.out.println("Digite a data de partida: ");
                 Date date = sdf.parse(scan1.nextLine());
                 bucarData(date).forEach(value -> System.out.println(value));
+                System.out.println("Digite o ID do voo para comprar: ");
+                pagamentoPassagem(valorDigitado(),cliente);
                 menuCliente();
             }
             case 2 -> {System.out.println("Digite o local de partida: ");
@@ -251,10 +254,21 @@ public class Menus {
                 System.out.println("Digite o local de chegada: ");
                 String lc = scan1.nextLine();
                 bucarTrajetoVoo(lp,lc).forEach(value -> System.out.println(value));
+                System.out.println("Digite o ID do voo para comprar: ");
+                pagamentoPassagem(valorDigitado(),cliente);
                 menuCliente();}
             case 0 -> {menuCliente();}
             default -> {System.err.println("Opção inválida!");}
         }
+    }
+
+    public static VooManipulacao pagamentoPassagem(int id, Cliente cliente){
+
+        vooManipulacao.getListVoos().stream().filter(x -> x.getId() == id).map(p -> p.getPassageiros().add(cliente)).toList();
+        Pagamento pagamento = new Pagamento(cliente, (Voo) vooManipulacao.readList(id));
+        System.out.println("Pagamento Confirmado");
+        pagamento.imprimirComprovante();
+        return vooManipulacao;
     }
 
 

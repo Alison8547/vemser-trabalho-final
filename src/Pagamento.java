@@ -15,10 +15,9 @@ public class Pagamento {
         idPagamento = 1 + secureRandom.nextInt(500);
     }
 
-    public Pagamento(Cliente cliente, Voo voo, CompanhiaAerea companhiaAerea) {
+    public Pagamento(Cliente cliente, Voo voo) {
         this.cliente = cliente;
         this.voo = voo;
-        this.companhiaAerea = companhiaAerea;
     }
 
     public boolean pagar(Voo voo) {
@@ -32,8 +31,6 @@ public class Pagamento {
         System.out.printf("Preço do Voo: R$ %.2f%n", voo.getPrecoPassagem());
         System.out.printf("Nome da Companhia: %s%n", companhiaAerea.getNome());
         System.out.printf("Id do Voo: %d%nLocal Partida: %s%nLocal Chegada: %s%n", voo.getId(), voo.getLocalPartida(), voo.getLocalChegada());
-
-
     }
 
     public String getDataHoraPagamento() {
