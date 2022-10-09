@@ -4,7 +4,10 @@ import java.util.stream.Collectors;
 
 public class VooManipulacao extends Crud{
 
-    static List<Voo> listVoos = new ArrayList<>();
+    public List<Voo> getListVoos(){
+        return super.getList();
+    }
+    private List<Voo> listVoos;
 
     public void updateList(Integer index, Voo obj) {
         Voo vooBuscado = listVoos.get(index);
@@ -15,21 +18,4 @@ public class VooManipulacao extends Crud{
         vooBuscado.setLocalChegada(obj.getLocalChegada());
         vooBuscado.setPrecoPassagem(obj.getPrecoPassagem());
     }
-
-    public static List<Voo> bucarPorLocalChegada(String localChegada) {
-        List<Voo> listaLocalCegada = listVoos.stream()
-                .filter(x -> x.getLocalChegada().equals(localChegada))
-                .collect(Collectors.toList());
-        return listaLocalCegada;
-    }
-
-    public static List<Voo> bucarPorLocalPartidaLocalChegada(String localPartida,String localChegada) {
-        List<Voo> listaPossivel = listVoos.stream()
-                .filter(x -> (x.getLocalChegada().equals(localChegada) && x.getLocalPartida().equals(localPartida)))
-                .collect(Collectors.toList());
-        return listaPossivel;
-    }
-
-    public List<Voo> getListVoos(){ return super.getList();}
-
 }
