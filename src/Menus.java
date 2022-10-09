@@ -260,7 +260,14 @@ public class Menus {
                 .forEach(value -> System.out.println(value.getDescricao()));
         switch (valorDigitado()){
             case 1 -> {procuraPassagem(cliente);menuCliente();}//COMPRA
-            case 2 -> {System.err.println("OPCAO 2 NAO DESENVOLVIDA");menuCliente();}//LISTAR VOO Q ESTE PASSAGEIRO COMPROU
+            case 2 -> {
+                vooManipulacao.getListVoos().stream()
+                        .filter(voo -> voo.getPassageiros().stream()
+                                .anyMatch(clientes -> clientes.getNome().contains(cliente.getNome() ) ))
+                        .toList()
+                        .forEach(System.out::println);
+                menuCliente();
+            }//LISTAR VOO Q ESTE PASSAGEIRO COMPROU
             case 0 -> {menuCliente();}
             default -> {
                 System.err.println("Opção inválida! Tente novamente.");
@@ -398,7 +405,6 @@ public class Menus {
             case 0 -> menuTodasCompanhias();
             case 1 -> {
                 Voo voo = new Voo();
-                voo.setPassageiros(null);
                 voo.setCompanhia(companhia.getNome());
                 System.out.println("Digite a data de partida: ");
                 Date date = dataDigitada();
@@ -421,13 +427,10 @@ public class Menus {
             }
             case 3 -> {
                 System.out.println("Digite o index do voo que voce deseja editar:");
-                vooManipulacao.listar();
+                buscaVooCompanhia(companhia.getNome());
                 System.out.println("Digite seu id: ");
-                int index = scan1.nextInt();
-                scan1.nextLine();
+                int id = valorDigitado();
                 Voo vooTeste = new Voo();
-                vooTeste.setPassageiros(null);
-                vooTeste.setCompanhia(companhia.getNome());
                 System.out.println("Digite a data de partida: ");
                 Date date = dataDigitada();
                 vooTeste.setDataPartida(date);
@@ -440,7 +443,8 @@ public class Menus {
                 vooTeste.setLocalChegada(scan1.nextLine());
                 System.out.println("Digite o preço da passagem: ");
                 vooTeste.setPrecoPassagem(scan1.nextDouble());
-                vooManipulacao.updateList(index, vooTeste);
+                scan1.nextLine();
+                vooManipulacao.updateList(id, vooTeste);
                 menuCompanhia(companhia);
             }
             case 4 -> {
