@@ -45,7 +45,10 @@ public class ClienteTest {
 
         clienteManipulacao.updateList(0, cliente2);
 
-        clienteManipulacao.listar();
+        Assertions.assertEquals(cliente2.getNome(), cliente.getNome());
+        Assertions.assertEquals(cliente2.getIdade(), cliente.getIdade());
+        Assertions.assertEquals(cliente2.getEmail(), cliente.getEmail());
+        Assertions.assertEquals(cliente2.getTelefone(), cliente.getTelefone());
     }
 
 
