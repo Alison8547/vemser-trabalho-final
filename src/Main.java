@@ -238,6 +238,6 @@ public class Main {
         companhiaManipulacao.createList(new CompanhiaAerea("Tam"));
         companhiaManipulacao.createList(new CompanhiaAerea("Gol"));
         companhiaManipulacao.createList(new CompanhiaAerea("Azul"));
-        menuInicial();
+        Menus.menuInicial(false);
     }
 }
