@@ -29,6 +29,7 @@ public class Cliente {
         return "Cliente{" +
                 "idCliente=" + idCliente +
                 ", nome='" + nome + '\'' +
+                ", idade=" + idade +
                 ", cpf='" + cpf + '\'' +
                 ", email='" + email + '\'' +
                 ", telefone='" + telefone + '\'' +

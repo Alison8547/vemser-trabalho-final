@@ -8,8 +8,13 @@ public class ClienteManipulacao extends Crud{
         this.clienteList = new ArrayList<>();
     }
 
+    @Override
+    public List<Cliente> getList() {
+        return super.getList();
+    }
+
     public void updateList(Integer index, Cliente obj) {
-        Cliente clienteBuscado = clienteList.get(index);
+        Cliente clienteBuscado = getList().get(index);
         clienteBuscado.setNome(obj.getNome());
         clienteBuscado.setIdade(obj.getIdade());
         clienteBuscado.setEmail(obj.getEmail());
