@@ -15,5 +15,4 @@ public class CompanhiaManipulacao extends Crud {
         CompanhiaAerea companhiaBuscada = getListCompanhia().get(index);
         companhiaBuscada.setNome(companhia.getNome());
     }
-
 }

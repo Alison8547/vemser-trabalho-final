@@ -10,7 +10,7 @@ public class VooManipulacao extends Crud{
     private List<Voo> listVoos;
 
     public void updateList(Integer index, Voo obj) {
-        Voo vooBuscado = listVoos.get(index);
+        Voo vooBuscado = getListVoos().get(index);
 //        vooBuscado.getPassageiros(null);
         vooBuscado.setDataPartida(obj.getDataPartida());
         vooBuscado.setDataChegada(obj.getDataChegada());

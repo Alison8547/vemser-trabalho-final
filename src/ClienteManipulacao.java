@@ -15,10 +15,4 @@ public class ClienteManipulacao extends Crud{
         clienteBuscado.setEmail(obj.getEmail());
         clienteBuscado.setTelefone(obj.getTelefone());
     }
-
-//    public void listarClientes() {
-//        for (int i = 0; i < clienteList.size(); i++) {
-//            System.out.println("id=" + i + " | " + clienteList.get(i));
-//        }
-//    }
 }

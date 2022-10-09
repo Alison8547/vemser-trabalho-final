@@ -5,7 +5,7 @@ public enum MenuClienteGeralEnum {
         BUSCAR_CLIENTE("Digite [3] para buscar um cliente específico"),
         EDITAR_CLIENTE("Digite [4] para editar"),
         EXCLUIR_CLIENTE("Digite [5] para excluir"),
-        VOLTAR("Digite [0] para voltar!");
+        VOLTAR("Digite [0] para voltar ao menu anterior!");
 
         private String descricao;
         MenuClienteGeralEnum(String descricao){
