@@ -12,6 +12,6 @@ public class TestPagamento {
         CompanhiaAerea companhiaAerea = new CompanhiaAerea("Gol");
         Pagamento pagamento = new Pagamento(cliente,voo,companhiaAerea);
 
-        pagamento.imprimirComprovante();
+        pagamento.imprimirDados();
     }
 }
